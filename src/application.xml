@@ -2,12 +2,32 @@
         "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
+    <!-- DataSources -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+        <property name="url" value
+                ="jdbc:hsqldb:file:database.dat;shutdown=true"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
 
-    <!-- add your bean definitions here! -->
-    <bean id="customerManagementService" class="com.yrgo.services.customers.CustomerManagementMockImpl"/>
+    <!-- Templates -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- Dao beans -->
+    <bean id="customerDao" class="com.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl" init-method="createTables">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="customerManagementService" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
+        <constructor-arg ref="customerDao"/>
+    </bean>
+
     <bean id="diaryManagementService" class="com.yrgo.services.diary.DiaryManagementServiceMockImpl"/>
 
-    <bean id="callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
+    <bean id=" callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
         <constructor-arg ref="customerManagementService"/>
         <constructor-arg ref="diaryManagementService"/>
     </bean>
