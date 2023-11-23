@@ -2,14 +2,17 @@ package com.yrgo.dataaccess;
 
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+@Repository
 public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
 
     private static final String CUSTOMER_ID_SQL = "SELECT CUSTOMER_ID FROM CUSTOMER WHERE CUSTOMER_ID = ?";
@@ -24,6 +27,7 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
 
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public CustomerDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
