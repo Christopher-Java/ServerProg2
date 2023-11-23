@@ -4,9 +4,9 @@ import com.yrgo.dataaccess.CustomerDao;
 import com.yrgo.dataaccess.RecordNotFoundException;
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
 public class CustomerManagementServiceProductionImpl implements CustomerManagementService {
     CustomerDao customerDao;
 
