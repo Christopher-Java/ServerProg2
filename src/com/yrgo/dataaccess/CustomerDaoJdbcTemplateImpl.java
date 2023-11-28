@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-@Repository
 public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
 
     private static final String CUSTOMER_ID_SQL = "SELECT CUSTOMER_ID FROM CUSTOMER WHERE CUSTOMER_ID = ?";
